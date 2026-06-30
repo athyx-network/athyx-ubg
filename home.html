@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home | Athyx</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .overlay { flex-direction: column; gap: 10px; pointer-events: none; }
+    .search-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      background: rgba(12,16,24,0.75);
+      padding: 12px 18px;
+      border-radius: 28px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+      width: 640px;
+      max-width: 92%;
+      z-index: 999;
+      pointer-events: auto;
+      margin-top: -44px;
+      outline: 2px solid rgba(207,233,255,0.06);
+      outline-offset: 6px;
+    }
+    .search-container:focus-within { outline-color: rgba(102,178,255,0.18); box-shadow: 0 8px 30px rgba(66,140,255,0.06); }
+    .search-container input::placeholder { color: rgba(207,233,255,0.22); }
+    .search-container input { flex:1; background:none; border:none; outline:none; color:var(--athyx-text,#cfe9ff); font-size:1rem; padding:6px; }
+    .search-container select { margin-left:10px; padding:6px 10px; border-radius:8px; background: linear-gradient(180deg,var(--athyx-bg-start,#000214),var(--athyx-bg-end,#000)); border:1px solid rgba(102,178,255,0.06); color:var(--athyx-text,#cfe9ff); }
+    .loading-spinner-overlay { position: fixed; inset:0; display:none; align-items:center; justify-content:center; background: rgba(13,13,13,0.8); z-index:9999; }
+    .loading-spinner-overlay.show{ display:flex }
+    .loading-spinner{ width:48px;height:48px;border:4px solid #222;border-top:4px solid #cfe9ff;border-radius:50%;animation:spin 1s linear infinite }
+    @keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+  </style>
+</head>
+
+<body>
+  <canvas id="scene"></canvas>
+  <div class="overlay">
+    <h1>Athyx</h1>
+
+    <!-- Search bar (moved under heading) -->
+    <form id="searchForm" class="search-container">
+      <input type="text" id="searchInput" placeholder="Search the web..." autocomplete="off">
+      <select id="engineSelect">
+        <option value="https://search.brave.com/search?q=" selected>Brave Search</option>
+        <option value="https://duckduckgo.com/?q=">DuckDuckGo</option>
+        <option value="https://www.google.com/search?safe=active&q=">Google</option>
+        <option value="https://www.bing.com/search?q=">Bing</option>
+      </select>
+    </form>
+  </div>
+
+  <!-- Loading Spinner (used by the search submit) -->
+  <div class="loading-spinner-overlay" id="loadingSpinner">
+    <div class="loading-spinner"></div>
+  </div>
+
+  <script src="js/script.js"></script>
+  <script src="js/home-widget.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script>
+      document.getElementById("searchForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+        const query = document.getElementById("searchInput").value.trim();
+        const engine = document.getElementById("engineSelect").value;
+        const urlToOpen = engine + encodeURIComponent(query);
+        const proxyUrl = `scramjet/index.html#url=${encodeURIComponent(urlToOpen)}`;
+  
+        if (!query) return;
+  
+        // show spinner
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        if (loadingSpinner) loadingSpinner.classList.add('show');
+  
+        // Try to ask parent to navigate (for proxy/scramjet shells that handle it)
+        try {
+          if (window.parent && window.parent !== window) {
+            window.parent.postMessage({ type: 'navigate', url: urlToOpen }, '*');
+            return;
+          }
+        } catch (e) {}
+  
+        // fallback: navigate this page through the proxy
+        setTimeout(() => { window.location.href = proxyUrl; }, 150);
+      });
+    </script>
+</body>
+
+</html>

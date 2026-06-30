@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Athyx Network | Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <iframe id="content-frame" name="content-frame" src="home.html" frameborder="0" title="Athyx content"></iframe>
+  <button class="sidebar-toggle" id="sidebarToggle" type="button" title="Hide icon bar" aria-label="Hide icon bar" aria-pressed="false">
+    <i class="fa-solid fa-eye-slash" aria-hidden="true"></i>
+  </button>
+  <nav class="sidebar" aria-label="Main">
+    <div class="sidebar-top">
+      <a href="home.html" title="Home" target="content-frame" class="home-link">
+        <i class="fa-solid fa-house"></i>
+        <span class="label">Home</span>
+      </a>
+    </div>
+    <div class="sidebar-group">
+      <a href="games.html" title="Games" target="content-frame">
+        <i class="fa-solid fa-gamepad" aria-hidden></i>
+        <span class="label">Games</span>
+      </a>
+      <a href="scramjet/index.html" title="Proxy" target="content-frame">
+        <i class="fa-solid fa-server" aria-hidden></i>
+        <span class="label">Proxy</span>
+      </a>
+      <a href="apps.html" title="Apps" target="content-frame">
+        <i class="fa-solid fa-th-large" aria-hidden></i>
+        <span class="label">Apps</span>
+      </a>
+      <a href="music.html" title="Music" target="content-frame">
+        <i class="fa-solid fa-music" aria-hidden></i>
+        <span class="label">Music</span>
+      </a>
+      <a href="watch.html" title="Watch" target="content-frame">
+        <i class="fa-solid fa-video" aria-hidden></i>
+        <span class="label">Watch</span>
+      </a>
+    </div>
+  </nav>
+  <script src="js/script.js"></script>
+    <script src="js/sidebar.js"></script>
+  <script>
+    (function() {
+      const iframe = document.getElementById('content-frame');
+      if (!iframe) return;
+
+      window.addEventListener('message', (event) => {
+        if (!event.data || event.data.type !== 'navigate' || !event.data.url) return;
+        iframe.src = `scramjet/index.html#url=${encodeURIComponent(event.data.url)}`;
+      });
+    })();
+  </script>
+</body>
+</html>

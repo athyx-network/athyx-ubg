@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Games | Athyx</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css?v=2">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="page-header games-header">
+      <div>
+        <h1>Games</h1>
+        <p class="page-kicker">Search the library once games are added.</p>
+      </div>
+    </header>
+    <main class="page-content games-page">
+      <div class="games-toolbar">
+        <form class="game-search" role="search" aria-label="Search games">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <input type="search" name="game-search" placeholder="Search games" autocomplete="off" />
+        </form>
+      </div>
+
+      <section class="empty-games" aria-label="No games available">
+        <div class="empty-games-icon">
+          <i class="fa-solid fa-gamepad" aria-hidden="true"></i>
+        </div>
+        <h2>No games added yet</h2>
+        <p>This page is ready. Game tiles will show here when you add them.</p>
+      </section>
+    </main>
+  </div>
+  <script src="js/sidebar.js"></script>
+</body>
+</html>

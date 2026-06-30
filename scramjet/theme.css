@@ -1,0 +1,90 @@
+/* Theme overrides to match home.html colors/background without altering layout */
+:root {
+  --athyx-bg-start: #000214;
+  --athyx-bg-end: #000000;
+  --athyx-text: #cfe9ff;
+  --athyx-muted: #a9cbe6;
+  --athyx-panel: rgba(12,16,24,0.55);
+  /* Map Scramjet variables to Athyx theme so layout uses new colors */
+  --bg: linear-gradient(180deg, #000214 0%, #000000 100%);
+  --button-bg: rgba(12,16,24,0.55);
+  --button-hover: rgba(207,233,255,0.03);
+  --third-bg: rgba(12,16,24,0.45);
+  --text-color: #cfe9ff;
+  --secondary-text-color: #a9cbe6;
+  --primary: #66b2ff;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  background: linear-gradient(180deg, var(--athyx-bg-start) 0%, var(--athyx-bg-end) 100%);
+  color: var(--athyx-text);
+  font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+
+/* Generic containers and panels should use subtle translucent panels */
+.container, .modal-container, .wisp-settings-container, .message-container, .current-wisp-display, .predefined-wisps, .page-shell {
+  color: var(--athyx-text);
+}
+
+/* Adjust headings and important text */
+h1, h2, h3, h4 {
+  color: var(--athyx-text);
+}
+
+/* Links / icons */
+a, .icon, button { color: var(--athyx-text); }
+
+/* Inputs and cards */
+.url-input, .result-input, .search-container, .shortcut-item .icon, .modal-container {
+  background: rgba(12,16,24,0.45);
+  border-color: rgba(255,255,255,0.03);
+}
+
+/* Muted text */
+.message-content p, .extras, .wisp-option-description, .shortcut-label {
+  color: var(--athyx-muted);
+}
+
+/* Loading overlays and spinners */
+.loading-spinner-overlay, .loading-overlay {
+  background: rgba(0,0,0,0.65) !important;
+  color: var(--athyx-text) !important;
+}
+
+.loading-spinner { border-top-color: #66b2ff !important; }
+
+/* Ensure theme styles don't unintentionally change layout sizing */
+* { box-sizing: border-box; }
+
+/* Canvas background (particles) and optional overlay styles */
+canvas#scene {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.overlay h1 {
+  margin: 0;
+  font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  font-weight: 800;
+  font-size: clamp(40px, 8vw, 80px);
+  color: var(--athyx-text);
+  text-shadow: 0 0 8px var(--athyx-text), 0 0 18px rgba(207,233,255,0.45);
+  transform: translateY(-10vh);
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Browser123</title>
+        <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="theme.css">
+        <script src="JS/scramjet.all.js"></script>
+        <script src="B/index.js"></script>
+        <script src="prxxry.config.js"></script>
+        <script src="script.js"></script>
+    </head>
+    <body>
+        <div id="app"></div>
+        
+        <!-- WISP Settings Modal -->
+        <div class="wisp-settings-modal modal-overlay hidden" id="wisp-settings-modal">
+            <div class="modal-container wisp-settings-container">
+                <div class="modal-header">
+                    <h3>WISP Settings</h3>
+                    <button class="modal-close-btn" id="close-wisp-modal">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M18 6 6 18M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="modal-body">
+                    <div class="wisp-section">
+                        <h4>Current WISP URL</h4>
+                        <div class="current-wisp-display">
+                            <code class="wisp-url-display" id="current-wisp-url"></code>
+                        </div>
+                    </div>
+
+                                   <div class="wisp-section">
+                        <h4>Predefined WISP URLs</h4>
+                        <div class="predefined-wisps">
+                            <div class="wisp-option" data-url="wss://register.goip.it/wisp/">
+                                <div class="wisp-option-header">
+                                    <span class="wisp-option-name">Space's Wisp</span>
+                                    <button class="wisp-option-btn" data-action="select-wisp">Select</button>
+                                </div>
+                                <div class="wisp-option-url">wss://register.goip.it/wisp/</div>
+                                <div class="wisp-option-description">Space's Wisp</div>
+                            </div>
+                            
+                            <div class="wisp-option" data-url="wss://dash.goip.de/wisp/">
+                                <div class="wisp-option-header">
+                                    <span class="wisp-option-name">DaydreamX's Wisp</span>
+                                    <button class="wisp-option-btn" data-action="select-wisp">Select</button>
+                                </div>
+                                <div class="wisp-option-url">wss://dash.goip.de/wisp/</div>
+                                <div class="wisp-option-description">DaydreamX's wisp</div>
+                            </div>
+                            
+                            <div class="wisp-option" data-url="wss://goshadow.net/wisp/">
+                                <div class="wisp-option-header">
+                                    <span class="wisp-option-name">GoShadow Wisp</span>
+                                    <button class="wisp-option-btn" data-action="select-wisp">Select</button>
+                                </div>
+                                <div class="wisp-option-url">wss://goshadow.net/wisp/</div>
+                                <div class="wisp-option-description">GoShadow WISP</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="wisp-section">
+                        <h4>Custom WISP URL</h4>
+                        <div class="custom-wisp-input">
+                            <input type="url"
+                                   id="custom-wisp-url"
+                                   placeholder="wss://your-wisp-server.com/wisp/"
+                                   class="wisp-url-input">
+                            <button class="wisp-test-btn" id="test-wisp-btn">Test Connection</button>
+                            <button class="wisp-save-btn" id="save-custom-wisp-btn">Save Custom</button>
+                        </div>
+                    </div>
+
+                    <div class="wisp-section">
+                        <h4>User Agent</h4>
+                        <div class="custom-wisp-input">
+                            <select id="user-agent-preset" class="wisp-url-input">
+                                <option value="">Browser Default</option>
+                                <option value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36">Chrome on Windows</option>
+                                <option value="Mozilla/5.0 (Macintosh; Intel Mac OS X 14_5) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Safari/605.1.15">Safari on macOS</option>
+                                <option value="Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1">Safari on iPhone</option>
+                                <option value="custom">Custom</option>
+                            </select>
+                            <input type="text"
+                                   id="custom-user-agent"
+                                   placeholder="Custom user agent"
+                                   class="wisp-url-input">
+                        </div>
+                    </div>
+
+                </div>
+                
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" id="close-wisp-modal-footer">Close</button>
+                    <button class="btn btn-primary" id="apply-wisp-btn" disabled>Apply Changes</button>
+                </div>
+            </div>
+        </div>
+        <script src="../js/sidebar.js"></script>
+    </body>
+</html>
